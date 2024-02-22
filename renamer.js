@@ -47,6 +47,6 @@ function renameFiles(directoryPath, baseName) {
 
 // Example usage:
 const directoryPath = './';
-const baseName = 'stage';
+const baseName = 'dev';
 
 renameFiles(directoryPath, baseName);
