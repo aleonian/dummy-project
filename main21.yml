@@ -1,0 +1,67 @@
+name: telesign
+
+env_file:
+  - .env
+
+recipe: wordpress
+
+proxy:
+  mailhog:
+    - mailhog.telesign.lndo.site
+
+config:
+  database: 'mysql:5.7'
+  php: '8.0'
+  webroot: .
+  via: nginx
+  xdebug: true
+
+services:
+  appserver:
+    run_as_root:
+      - 'chmod u+x /app/init.sh'
+      - /app/init.sh
+    overrides:
+      environment:
+        PHP_IDE_CONFIG: 'serverName=appserver'
+  mailhog:
+    type: mailhog
+    portforward: true
+    hogfrom:
+      - appserver
+  node:
+    globals:
+      gulp-cli: latest
+    type: node
+
+
+tooling:
+  composer:
+    description: Runs Composer Commands on Appserver
+    service: appserver
+    cmd: composer
+  node:
+    description: Runs node commands
+    service: node
+    cmd: node
+  npm:
+    description: Runs npm commands
+    service: node
+    cmd: npm
+  npx:
+    description: Runs npm commands
+    service: node
+    cmd: npx
+  dev:
+    description: Runs npm commands
+    service: node
+    cmd: cd wp-content/themes/tailwind-telesign && npm run watch
+  prod:
+    description: Runs npm commands
+    service: node
+    cmd: cd wp-content/themes/tailwind-telesign && npm run prod
+  pullstage:
+    service: appserver
+    description: Pull data from WPE Stage
+    dir: /app
+    cmd: /app/pullfrom telesignstage
