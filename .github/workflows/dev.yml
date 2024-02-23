@@ -12,6 +12,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Install LFTP
+        run: sudo apt-get update && sudo apt-get install -y lftp
+        
       - name: ftp-upload-action
         uses: GenieTim/ftp-action@v4.0.1
         
