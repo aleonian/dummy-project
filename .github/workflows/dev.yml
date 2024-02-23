@@ -19,10 +19,8 @@ jobs:
 
       - name: Install dependencies and run prod
         run: |
-          ls -al
           npm install
           npm run prod
-          ls -al
         working-directory: npm-script/
 
       - name: Upload artifact
