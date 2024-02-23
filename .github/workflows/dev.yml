@@ -45,7 +45,7 @@ jobs:
 
       - name: Clean for Deploy
         run: |
-          rm -r node_modules/
+          rm -r npm-script/node_modules/
           rm -r .github/
           rm -r .git/
           rm .gitignore
