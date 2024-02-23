@@ -1,2 +1,0 @@
-# telesign-webdev
-telesign.com
