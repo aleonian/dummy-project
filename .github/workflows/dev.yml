@@ -57,7 +57,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: current_date.txt
-          path: npm-script/current_date.txt
+          path: npm-script/
 
       - name: Sync files via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
