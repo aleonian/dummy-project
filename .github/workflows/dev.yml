@@ -23,13 +23,13 @@ jobs:
           npm run prod
         working-directory: npm-script/
 
-      - name: Commit generated files
-        run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-          git add .
-          git commit -m "Add generated files"
-          git push
+      # - name: Commit generated files
+      #   run: |
+      #     git config --global user.email "actions@github.com"
+      #     git config --global user.name "GitHub Actions"
+      #     git add .
+      #     git commit -m "Add generated files"
+      #     git push
 
   ftp-upload:
     name: 🎉 Deploy
