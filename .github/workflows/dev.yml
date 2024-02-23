@@ -15,8 +15,8 @@ jobs:
       - name: Install LFTP
         run: sudo apt-get update && sudo apt-get install -y lftp;which lftp
 
-      - name: Set LFTP Path
-        run: echo "::set-env name=LFTP::/usr/bin/lftp"
+      - name: Set up Environment
+        run: source env.txt
 
       - name: FTP Deploy
         run: $LFTP -e "put -r ./ /public_html/dummy_project/dev" -u ${{ secrets.FTP_USERNAME }} -p ${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_SERVER }}
