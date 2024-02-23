@@ -30,7 +30,7 @@ jobs:
             git add .
             git commit -m "Add generated files"
             git push
-            
+
   ftp-upload:
       name: 🎉 Deploy
       runs-on: ubuntu-latest
@@ -45,4 +45,5 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./
-          server-dir: public_html/dummy_project/dev/            
+          server-dir: public_html/dummy_project/dev/    
+        needs: rebundle_styles_and_js   
