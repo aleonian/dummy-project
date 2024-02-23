@@ -19,7 +19,7 @@ jobs:
         run: source env.txt
 
       - name: FTP Deploy
-        run: $LFTP -c "open -u ${{ secrets.FTP_USERNAME }},$${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_SERVER }}; mirror -R ./ /public_html/dummy_project/dev"
+        run: echo "open -u ${{ secrets.FTP_USERNAME }},$${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_SERVER }}\nmirror -R ./ /public_html/dummy_project/dev" | $LFTP
 
       # - name: Ftp Upload
       #   uses: GenieTim/ftp-action@v4.0.1
