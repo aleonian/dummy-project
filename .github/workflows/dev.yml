@@ -12,6 +12,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Delete current-date.txt
+        run: rm -f npm-script/current-date.txt 
+        working-directory: npm-script/  
+          
       - name: Set up Node.js and run prod script
         uses: actions/setup-node@v2
         with:
