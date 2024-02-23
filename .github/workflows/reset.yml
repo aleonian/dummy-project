@@ -1,0 +1,26 @@
+name: Reset Branches on New Tag
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  reset-branches:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Reset dev Branch to main
+        run: |
+          git checkout dev
+          git reset --hard main
+          git push --force origin dev
+
+      - name: Reset stage Branch to main
+        run: |
+          git checkout stage
+          git reset --hard main
+          git push --force origin stage
