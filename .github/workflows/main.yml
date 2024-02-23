@@ -1,18 +1,55 @@
 name: Deploy to main
+
 on:
   push:
     branches:
-     - main
+      - main
 
 jobs:
+  rebundle_styles_and_js:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js and run prod script
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+
+      - name: Install dependencies and run prod
+        run: |
+          npm install
+          npm run prod
+        working-directory: npm-script/
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: current_date.txt
+          path: npm-script/current_date.txt
+
   ftp-upload:
-      name: 🎉 Deploy
-      runs-on: ubuntu-latest
-      steps:
-      - name: 🚚 Get latest code
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    needs: rebundle_styles_and_js
+    steps:
+      - name: Get latest code
         uses: actions/checkout@v3
-      
-      - name: 📂 Sync files
+
+      - name: Clean for Deploy
+        run: |
+          rm -r .github/
+          rm -r .git/
+          rm .gitignore
+
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: current_date.txt
+          path: npm-script/
+
+      - name: Sync files via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_SERVER }}
