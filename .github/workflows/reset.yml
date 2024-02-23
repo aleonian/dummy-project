@@ -2,8 +2,8 @@ name: Reset Branches on New Tag
 
 on:
   push:
-    tags:
-      - '*'
+    branches:
+     - reset
 
 jobs:
   reset-branches:
