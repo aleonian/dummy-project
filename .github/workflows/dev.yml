@@ -13,7 +13,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Delete current-date.txt
-        run: rm -f npm-script/current-date.txt
+        run:
+          ls -al 
+          ls -al npm-script
+          rm -f npm-script/current-date.txt
         working-directory: npm-script/
 
       - name: Set up Node.js and run prod script
@@ -23,9 +26,6 @@ jobs:
 
       - name: Install dependencies and run prod
         run: |
-          ls -al
-          ls -al 
-          npm-script
           npm install
           npm run prod
         working-directory: npm-script/
