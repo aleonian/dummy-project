@@ -23,6 +23,9 @@ jobs:
 
       - name: Install dependencies and run prod
         run: |
+          ls -al
+          ls -al 
+          npm-script
           npm install
           npm run prod
         working-directory: npm-script/
@@ -46,6 +49,7 @@ jobs:
       - name: Clean for Deploy
         run: |
           ls -al
+          ls -al npm-script
           rm -r npm-script/node_modules/
           rm -r .github/
           rm -r .git/
