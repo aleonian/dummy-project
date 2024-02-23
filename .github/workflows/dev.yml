@@ -6,38 +6,15 @@ on:
 
 jobs:
   ftp-upload:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Install LFTP
-        run: sudo apt-get update && sudo apt-get install -y lftp;which lftp
-
-      - name: Set up Environment
-        run: source env.txt
-
-      # - name: FTP Deploy
-      #   run: echo "open -u ${{ secrets.FTP_USERNAME }},$${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_SERVER }}\nmirror -R ./ /public_html/dummy_project/dev" | $LFTP
-          
-      - name: FTP Deploy
-        run: |
-          echo "Starting FTP deployment"
-          echo "FTP Server: ${{ secrets.FTP_SERVER }}"
-          echo "FTP Username: ${{ secrets.FTP_USERNAME }}"
-          echo "FTP Password: ***"  # Avoid exposing the password in the log
-          echo "Uploading files..."
-          echo "open -u ${{ secrets.FTP_USERNAME }},$${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_SERVER }}"
-          echo "mirror -R ./ /public_html/dummy_project/dev"
-          echo "FTP deployment completed"
-
-      # - name: Ftp Upload
-      #   uses: GenieTim/ftp-action@v4.0.1
-        
-      #   with:
-      #     host: ${{ secrets.FTP_SERVER }}
-      #     user: ${{ secrets.FTP_USERNAME }}
-      #     password: ${{ secrets.FTP_PASSWORD }}
-      #     localDir: ./
-      #     remoteDir: /public_html/dummy_project/dev
+      name: 🎉 Deploy
+      runs-on: ubuntu-latest
+      steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v3
+      
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
