@@ -15,12 +15,18 @@ jobs:
       - name: Install LFTP
         run: sudo apt-get update && sudo apt-get install -y lftp;which lftp
 
-      - name: Ftp Upload
-        uses: GenieTim/ftp-action@v4.0.1
+      - name: Set LFTP Path
+        run: echo "::set-env name=LFTP::/usr/bin/lftp"
+
+      - name: FTP Deploy
+        run: $LFTP -e "put -r ./ /public_html/dummy_project/dev" -u ${{ secrets.FTP_USERNAME }} -p ${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_SERVER }}
+
+      # - name: Ftp Upload
+      #   uses: GenieTim/ftp-action@v4.0.1
         
-        with:
-          host: ${{ secrets.FTP_SERVER }}
-          user: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          localDir: ./
-          remoteDir: /public_html/dummy_project/dev
+      #   with:
+      #     host: ${{ secrets.FTP_SERVER }}
+      #     user: ${{ secrets.FTP_USERNAME }}
+      #     password: ${{ secrets.FTP_PASSWORD }}
+      #     localDir: ./
+      #     remoteDir: /public_html/dummy_project/dev
