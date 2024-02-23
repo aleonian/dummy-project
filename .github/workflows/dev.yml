@@ -25,6 +25,12 @@ jobs:
           ls -al
         working-directory: npm-script/
 
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: current_date.txt
+          path: npm-script/current_date.txt
+
       # - name: Commit generated files
       #   run: |
       #     git config --global user.email "actions@github.com"
@@ -43,12 +49,15 @@ jobs:
 
       - name: Clean for Deploy
         run: |
-          ls -al
-          ls -al npm-script
-          rm -r npm-script/node_modules/
           rm -r .github/
           rm -r .git/
           rm .gitignore
+
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: current_date.txt
+          path: npm-script/current_date.txt
 
       - name: Sync files via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
