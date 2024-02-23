@@ -23,11 +23,11 @@ jobs:
       - name: Reset dev Branch to main
         run: |
           git checkout dev
-          git reset --hard main
+          git reset --hard origin/main
           git push --force origin dev
 
       - name: Reset stage Branch to main
         run: |
           git checkout stage
-          git reset --hard main
+          git reset --hard origin/main
           git push --force origin stage
