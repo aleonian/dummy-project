@@ -12,11 +12,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: FTP Upload
-        uses: wbeuil/ftp-deploy-action@v3
+      - name: ftp-upload-action
+        uses: GenieTim/ftp-action@v4.0.1
+        
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
+          host: ${{ secrets.FTP_SERVER }}
+          user: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./
-          remote-dir: /public_html/dummy_project/dev
+          localDir: ./
+          remoteDir: /public_html/dummy_project/dev
