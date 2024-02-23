@@ -24,3 +24,5 @@ const filePath = 'current_date.txt';
 fs.writeFileSync(filePath, fileContent);
 
 console.log(`File '${filePath}' has been created with the current date in three different formats.`);
+
+console.log(fileContent);
