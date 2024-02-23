@@ -16,8 +16,8 @@ jobs:
         uses: GenieTim/ftp-action@v4.0.1
         
         with:
-          ftp-server: ${{ secrets.FTP_SERVER }}
-          ftp-username: ${{ secrets.FTP_USERNAME }}
-          ftp-password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./
-          remote-dir: /public_html/dummy_project/dev
+          host: ${{ secrets.FTP_SERVER }}
+          user: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          localDir: ./
+          remoteDir: /public_html/dummy_project/dev
