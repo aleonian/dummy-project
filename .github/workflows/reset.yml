@@ -13,6 +13,11 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Debug Branches
+        run: |
+          git branch --list
+          git remote show origin
+
       - name: Reset dev Branch to main
         run: |
           git checkout dev
